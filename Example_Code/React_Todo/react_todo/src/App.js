@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import InputContainer from './containers/InputContainer';
 import ListContainer from './containers/ListContainer';
@@ -13,14 +12,21 @@ class App extends Component {
     }
 
     this.addTodo = this.addTodo.bind(this);
+    this.onListItemClick = this.onListItemClick.bind(this);
   }
 
   addTodo(todoText) {
     const todoList = this.state.todoList;
     todoList.push(todoText);
     this.setState(() => ({todoList}));
-    console.log("DISPLAYING TODO LIST FROM MAIN APP CONTAINER: ");
-    console.log(todoList);
+  }
+
+  onListItemClick(itemIndex) {
+    let todoList = this.state.todoList;
+    todoList.splice(itemIndex, 1);
+    window.setTimeout(() => {
+      this.setState(() => ({todoList}));
+    });
   }
 
   render() {
@@ -31,7 +37,7 @@ class App extends Component {
           <InputContainer 
             addTodo = {this.addTodo}
           />
-          <ListContainer list={list}></ListContainer>
+          <ListContainer list={list} onListItemClick={this.onListItemClick}></ListContainer>
         </div>
       </div>
     
