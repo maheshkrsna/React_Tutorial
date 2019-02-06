@@ -12,7 +12,7 @@ class App extends Component {
     }
 
     this.addTodo = this.addTodo.bind(this);
-    this.onListItemClick = this.onListItemClick.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   addTodo(todoText) {
@@ -21,7 +21,7 @@ class App extends Component {
     this.setState(() => ({todoList}));
   }
 
-  onListItemClick(itemIndex) {
+  deleteTodo(itemIndex) {
     let todoList = this.state.todoList;
     todoList.splice(itemIndex, 1);
     window.setTimeout(() => {
@@ -37,7 +37,7 @@ class App extends Component {
           <InputContainer 
             addTodo = {this.addTodo}
           />
-          <ListContainer list={list} onListItemClick={this.onListItemClick}></ListContainer>
+          <ListContainer list={list} onListItemClick={this.deleteTodo}></ListContainer>
         </div>
       </div>
     
