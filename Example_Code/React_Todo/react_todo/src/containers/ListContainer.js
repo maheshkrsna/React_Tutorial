@@ -1,4 +1,5 @@
 import React from 'react';
+import ListItem from '../components/ListItemComponent';
 
 class listContainer extends React.Component {
     constructor(props) {
@@ -6,15 +7,15 @@ class listContainer extends React.Component {
         this.onListItemClick = this.onListItemClick.bind(this);
     }
 
-    onListItemClick(e) {
+    onListItemClick(listIndex) {
         let { onListItemClick } = this.props;
-        onListItemClick(e.currentTarget.dataset.id);
+        onListItemClick(listIndex);
     }
 
     render() {
         const { list } = this.props;
         const listItems = list.map((listItem, index) => {
-            return <li data-id={index} key={index} onClick={this.onListItemClick}>{listItem}</li>
+            return <ListItem listIndex={index} key={index} onListItemClick={this.onListItemClick} listItem={listItem}></ListItem>
         });
         return (
             <ul>{listItems}</ul>
